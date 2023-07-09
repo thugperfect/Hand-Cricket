@@ -55,12 +55,14 @@ function optbox() {
   three.innerHTML = "3";
 }
 function rightSidePanel() {
-  let zero = document.getElementById("zero");
+  
   let selectValue = document.querySelectorAll(".options");
-let displayBox = document.getElementById("display-box")
+  let displayBox = document.getElementById("display-box");
   selectValue.forEach((i) => {
     i.addEventListener("click", () => {
-      displayBox.innerHTML = i.innerHTML
+      
+      let leftValue = parseInt(i.innerHTML);
+      displayBox.innerHTML =leftValue;
     });
   });
 }
@@ -68,11 +70,13 @@ let displayBox = document.getElementById("display-box")
 function middlescore() {
   let score = document.createElement("div");
   score.className = "score";
+  score.id = "score"
   let tossBtn = document.createElement("button");
   tossBtn.className = "toss-btn";
   tossBtn.id = "toss-btn";
   let bottomScore = document.createElement("div");
   bottomScore.className = "score";
+
   middle.appendChild(score);
   middle.appendChild(tossBtn);
   middle.appendChild(bottomScore);
@@ -91,16 +95,38 @@ function toss(flag) {
   if (flag == 1) {
     tossBtn.innerHTML = "";
     let wrap = document.createElement("div");
-    wrap.className = "wrap"
+    wrap.className = "wrap";
     let odd = document.createElement("button");
     let even = document.createElement("button");
-    odd.className = "options";
-    even.className = "options";
+    odd.className = "option";
+    odd.id = "odd"
+    even.id = "even"
+
+    even.className = "option";
     wrap.id = "wrap";
     tossBtn.appendChild(wrap);
     wrap.appendChild(odd);
     wrap.appendChild(even);
     odd.innerHTML = "odd";
     even.innerHTML = "even";
+    let selectValueo = document.querySelectorAll(".option");
+    let displayBoxo = document.getElementById("score");
+    let displayBox = document.getElementById("display-box");
+    selectValueo.forEach((i) => {
+      i.addEventListener("click", () => {
+        if(displayBox.innerHTML == ""){
+          alert("select runs")
+        }
+        else if(i.innerHTML == "odd"){
+          even.style.display = "none"
+      
+        }
+        else if(i.innerHTML == "even"){
+          odd.style.display = "none"
+        }
+        displayBoxo.innerHTML = i.innerHTML
+       
+      });
+    });
   }
 }
