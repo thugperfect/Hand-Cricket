@@ -6,6 +6,7 @@ function start() {
 
   let left = document.createElement("div");
   left.id = "left";
+  left.className = "display-box"
   let middle = document.createElement("div");
   middle.id = "middle";
   let right = document.createElement("div");
@@ -15,12 +16,22 @@ function start() {
   body.appendChild(right);
   middlescore();
   rightfn();
+  leftfn();
+}
+
+function leftfn(){
+let left = document.getElementById("left")
+let randomNumber = Math.floor(Math.random()*4)
+let selectValueo = document.querySelector(".option");
+
+
 }
 
 function rightfn() {
   const rightel = document.getElementById("right");
   let displayBox = document.createElement("div");
   displayBox.id = "display-box";
+  displayBox.className = "display-box"
 
   let optionBox = document.createElement("div");
   optionBox.id = "option-box";
@@ -91,6 +102,7 @@ function middlescore() {
 }
 
 function toss(flag) {
+  let oddOrEven = Math.floor(Math.random() * 4);
   let tossBtn = document.getElementById("toss-btn");
   if (flag == 1) {
     tossBtn.innerHTML = "";
@@ -109,9 +121,14 @@ function toss(flag) {
     wrap.appendChild(even);
     odd.innerHTML = "odd";
     even.innerHTML = "even";
+    let left = document.getElementById("left")
     let selectValueo = document.querySelectorAll(".option");
     let displayBoxo = document.getElementById("score");
     let displayBox = document.getElementById("display-box");
+    let numdisplayBox = parseInt(displayBox.innerText)
+    let numLeft = parseInt(left.innerText)
+    let oddArray = [1,3,5,7,9];
+    let evenArray = [0,2,4,6,8];
     selectValueo.forEach((i) => {
       i.addEventListener("click", () => {
         if(displayBox.innerHTML == ""){
@@ -119,12 +136,39 @@ function toss(flag) {
         }
         else if(i.innerHTML == "odd"){
           even.style.display = "none"
+          left.innerText = oddOrEven;
+
+          for(i = 0;i<5;i++){
+            if(numdisplayBox+oddOrEven == oddArray[i]){
+                  displayBoxo.innerHTML = "choose two"
+                  console.log(numdisplayBox+oddOrEven);
+            }
+            else  if (numdisplayBox+oddOrEven == evenArray[i]){
+              displayBoxo.innerHTML = "loose toss"
+              console.log(numdisplayBox+oddOrEven);
+            }
+          }
+         
+          
+
       
         }
         else if(i.innerHTML == "even"){
           odd.style.display = "none"
+          left.innerHTML = oddOrEven;
+          for(i = 0;i<5;i++){
+            if(numdisplayBox+oddOrEven == evenArray[i]){
+                  displayBoxo.innerHTML = "choose two"
+                  console.log(numdisplayBox+oddOrEven);
+            }
+            else  if (numdisplayBox+oddOrEven == oddArray[i]){
+              displayBoxo.innerHTML = "loose toss"
+              console.log(numdisplayBox+oddOrEven);
+            }
+          }
+
         }
-        displayBoxo.innerHTML = i.innerHTML
+      
        
       });
     });
