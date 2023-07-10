@@ -21,6 +21,10 @@ function start() {
 
 function leftfn(){
 let left = document.getElementById("left")
+let leftb = document.createElement("div")
+leftb.className = "display-box"
+leftb.id = "leftb"
+left.appendChild(leftb)
 let randomNumber = Math.floor(Math.random()*4)
 let selectValueo = document.querySelector(".option");
 
@@ -108,7 +112,7 @@ function middlescore() {
 }
 function toss(flag) {
   let firstBatting;
-  let firstBowling;
+let leftb = document.getElementById("leftb")
   let newScore  = 0
  let score = 0
  let hisScore = 0
@@ -145,17 +149,23 @@ function toss(flag) {
     let oddArray = [1,3,5,7,9];
     let evenArray = [0,2,4,6,8];
 
-     
+    let notifyl = document.createElement("h3")
+    notifyl.id = "notifyl"
+  leftb.innerHTML = ""
+  left.appendChild(notifyl)
+  let notify = document.createElement("h3")
+  notify.id = "notify"
+leftb.innerHTML = ""
+right.appendChild(notify)
+
     function battingfn(){
 
 
-      let notify = document.createElement("h3")
-      notify.id = "notify"
-    left.innerHTML = ""
+     
    let wrapBatOrBowlBtn = document.createElement("div")
    wrapBatOrBowlBtn.id = "wrapbatorbowlbtn"
    tossBtn.appendChild(wrapBatOrBowlBtn)
-    right.appendChild(notify)
+
   
       notify.innerHTML = "youre batting"
       let batting = document.createElement("button")
@@ -169,7 +179,7 @@ function toss(flag) {
           let  tempScore = parseInt(displayBox.innerText)
           let totalScore = tempScore+newScore
           let random = Math.floor(Math.random()*4)
-          left.innerHTML = random
+          leftb.innerHTML = random
           if(displayBox.innerText == random){
             displayBoxo.innerHTML = "out"
             i.style.display = "none"
@@ -177,10 +187,38 @@ function toss(flag) {
             if(newScore === 0){
               BottomDisplayBox.innerHTML = `score:0`
               notify.innerHTML = "out"
+              if(firstBatting){
+       wrapBatOrBowlBtn.style.display = "none"
+                bowlingfn()
+          
+              }
+              else{
+                if(score<hisScore){
+                  console.log("he won");
+                  notify.innerHTML = "you lose"
+                } else{
+                  console.log("you won");
+                  notify.innerHTML = "you won"
+                }
+              }
             }
             else{
               BottomDisplayBox.innerHTML = `your score:${score}`
               notify.innerHTML = "out"
+              if(firstBatting){
+                wrapBatOrBowlBtn.style.display = "none"
+                bowlingfn()
+                
+              }
+              else{
+                if(score<hisScore){
+                  console.log("he won");
+                  notify.innerHTML = "you lose"
+                } else{
+                  console.log("you won");
+                  notify.innerHTML = "you won"
+                }
+              }
             }
           
           }
@@ -189,6 +227,7 @@ function toss(flag) {
               score = newScore
               BottomDisplayBox.innerHTML = `your score:${score}`
               notify.innerHTML = "out"
+           
 
             }
             else{
@@ -198,20 +237,21 @@ function toss(flag) {
              }
            
           }
+
+  
         })
       })
     }
     
 
     function bowlingfn(){
-  
-      let notify = document.createElement("h3")
-      notify.id = "notify"
-    left.innerHTML = ""
+
+      let notify = document.getElementById("notify")
+   
    let wrapBatOrBowlBtn = document.createElement("div")
    wrapBatOrBowlBtn.id = "wrapbatorbowlbtn"
    tossBtn.appendChild(wrapBatOrBowlBtn)
-    right.appendChild(notify)
+    left.appendChild(notifyl)
     notify.innerHTML = "youre bowling"
     let bowling = document.createElement("button")
     bowling.className = "optionsss"
@@ -223,7 +263,7 @@ function toss(flag) {
       i.addEventListener("click",()=>{
 
         var random = Math.floor(Math.random()*4)
-        left.innerHTML = random
+        leftb.innerHTML = random
         let totalHisScore =random+newHisScore
         let numRight = parseInt(displayBox.innerText)
         if(random == numRight){
@@ -231,11 +271,42 @@ function toss(flag) {
           displayBoxo.innerHTML = "out"
           if(hisScore === 0){
             BottomDisplayBox.innerHTML = `score:0`
-            notify.innerHTML = "out"
+            notifyl.innerHTML = "out"
+            if(!firstBatting){
+              wrapBatOrBowlBtn.style.display = "none"
+              battingfn()
+            }else{
+              if(score>hisScore){
+                console.log("you won");
+              }
+              else{
+                if(score<hisScore){
+                  console.log("he won");
+                  notify.innerHTML = "you lose"
+                } else{
+                  console.log("you won");
+                  notify.innerHTML = "you won"
+                }
+              }
+             
+            }
           }
           else{
             BottomDisplayBox.innerHTML = `his score:${hisScore}`
-            notify.innerHTML = "out"
+            notifyl.innerHTML = "out"
+            if(!firstBatting){
+              wrapBatOrBowlBtn.style.display = "none"
+              battingfn()
+            }
+            else{
+              if(score<hisScore){
+                console.log("he won");
+                notify.innerHTML = "you lose"
+              } else{
+                console.log("you won");
+                notify.innerHTML = "you won"
+              }
+            }
           }
         }
         else{
@@ -247,7 +318,7 @@ function toss(flag) {
           }
           else{
             hisScore = totalHisScore
-            displayBoxo.innerHTML = `score:${totalHisScore}`
+            displayBoxo.innerHTML = ` his score:${totalHisScore}`
             newHisScore = totalHisScore 
                               
            }
@@ -266,7 +337,7 @@ function toss(flag) {
         else if(i.innerHTML == "odd"){
           even.style.display = "none"
          
-          left.innerText = oddOrEven;
+          leftb.innerText = oddOrEven;
 
           for(i = 0;i<5;i++){
             if(numdisplayBox+oddOrEven == oddArray[i]){
@@ -302,7 +373,7 @@ function toss(flag) {
         }
         else if(i.innerHTML == "even"){
           odd.style.display = "none"
-          left.innerHTML = oddOrEven;
+          leftb.innerHTML = oddOrEven;
           for(i = 0;i<5;i++){
             if(numdisplayBox+oddOrEven == evenArray[i]){
               displayBoxo.innerHTML = "choose two"
