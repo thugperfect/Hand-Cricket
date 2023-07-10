@@ -92,6 +92,7 @@ function middlescore() {
   tossBtn.id = "toss-btn";
   let bottomScore = document.createElement("div");
   bottomScore.className = "score";
+  bottomScore.id = "bottom-score"
 
   middle.appendChild(score);
   middle.appendChild(tossBtn);
@@ -106,6 +107,9 @@ function middlescore() {
   });
 }
 function toss(flag) {
+  let newScore  = 0
+ let score = 0
+ 
  let oddOrEven = Math.floor(Math.random() * 4) 
   let tossBtn = document.getElementById("toss-btn");
   if (flag == 1) {
@@ -138,10 +142,97 @@ function toss(flag) {
     let evenArray = [0,2,4,6,8];
 
      
+    function battingfn(){
+
+
+      let notify = document.createElement("h3")
+      notify.id = "notify"
+    left.innerHTML = ""
+   let wrapBatOrBowlBtn = document.createElement("div")
+   wrapBatOrBowlBtn.id = "wrapbatorbowlbtn"
+   tossBtn.appendChild(wrapBatOrBowlBtn)
+    right.appendChild(notify)
+  
+      notify.innerHTML = "youre batting"
+      let batting = document.createElement("button")
+      batting.className = "optionsss"
+      wrapBatOrBowlBtn.appendChild(batting)
+      batting.innerHTML = "bat"
+      let BottomDisplayBox = document.getElementById("bottom-score")
+      let battingOrBowling = document.querySelectorAll(".optionsss")
+      battingOrBowling.forEach((i)=>{
+        i.addEventListener("click",()=>{
+          let  tempScore = parseInt(displayBox.innerText)
+          let totalScore = tempScore+newScore
+          let random = Math.floor(Math.random()*4)
+          left.innerHTML = random
+          if(displayBox.innerText == random){
+            displayBoxo.innerHTML = "out"
+            i.style.display = "none"
+            let bowling = document.createElement("button")
+        bowling.className = "optionsss"
+        wrapBatOrBowlBtn.appendChild(bowling)
+        bowling.innerHTML = "bowl"
+            if(newScore === 0){
+              BottomDisplayBox.innerHTML = `score:0`
+              notify.innerHTML = "out"
+            }
+            else{
+              BottomDisplayBox.innerHTML = `your score:${score}`
+              notify.innerHTML = "out"
+            }
+          
+          }
+          else{
+            if(displayBox.innerHTML == random){
+              score = newScore
+              BottomDisplayBox.innerHTML = `your score:${score}`
+              notify.innerHTML = "out"
+
+            }
+            else{
+              score = totalScore
+              displayBoxo.innerHTML = `score:${totalScore}`
+              newScore = totalScore                   
+             }
+           
+          }
+        })
+      })
+    }
     
-    
+
+    function bowlingfn(){
+
+      let notify = document.createElement("h3")
+      notify.id = "notify"
+    left.innerHTML = ""
+   let wrapBatOrBowlBtn = document.createElement("div")
+   wrapBatOrBowlBtn.id = "wrapbatorbowlbtn"
+   tossBtn.appendChild(wrapBatOrBowlBtn)
+    right.appendChild(notify)
+    notify.innerHTML = "youre bowling"
+    let bowling = document.createElement("button")
+    bowling.className = "optionsss"
+    wrapBatOrBowlBtn.appendChild(bowling)
+    bowling.innerHTML = "bowl"
+    let BottomDisplayBox = document.getElementById("bottom-score")
+    let battingOrBowling = document.querySelectorAll(".optionsss")
+    battingOrBowling.forEach((i)=>{
+      i.addEventListener("click",()=>{
+        var random = Math.floor(Math.random()*4)
+        left.innerHTML = random
+        let numRight = parseInt(displayBox.innerHTML)
+        if(random == numRight){
+          console.log("out");
+        }
+      })})
+
+    }
     selectValueo.forEach((i) => {
       i.addEventListener("click", () => {
+
+       
         if(displayBox.innerHTML == ""){
           alert("select runs")
         }
@@ -167,8 +258,15 @@ function toss(flag) {
               wrapBatOrBowl.appendChild(bowlChoice)
             }
             else  if (numdisplayBox+oddOrEven == evenArray[i]){
-            
+            wrap.style.display = "none"
               displayBoxo.innerHTML = batOrBowl[numBatOrBowl]
+        
+              if(numBatOrBowl === 0){
+             battingfn()
+              }
+              else{
+                bowlingfn()
+              }
             
             }
           }
@@ -179,9 +277,9 @@ function toss(flag) {
           for(i = 0;i<5;i++){
             if(numdisplayBox+oddOrEven == evenArray[i]){
               displayBoxo.innerHTML = "choose two"
-  
               let wrapBatOrBowl = document.createElement("div")
               wrapBatOrBowl.id = "wrapbatorbowl"
+           
               let batChoice = document.createElement("button")
               batChoice.className = "optionss"
               batChoice.innerHTML = "bat"
@@ -195,6 +293,14 @@ function toss(flag) {
             else  if (numdisplayBox+oddOrEven == oddArray[i]){
               
               displayBoxo.innerHTML = batOrBowl[numBatOrBowl]
+              wrap.style.display = "none"
+              if(numBatOrBowl === 0){
+               
+              battingfn()
+              }
+              else{
+                bowlingfn()
+              }
               
             }
           }
@@ -211,43 +317,22 @@ function toss(flag) {
             wrapBatOrBowl.style.display = "none"
             displayBoxo.innerHTML = ""
             
-          let notify = document.createElement("h3")
-          notify.id = "notify"
-        left.innerHTML = ""
-       let wrapBatOrBowlBtn = document.createElement("div")
-       wrapBatOrBowlBtn.id = "wrapbatorbowlbtn"
-       tossBtn.appendChild(wrapBatOrBowlBtn)
-        right.appendChild(notify)
-      
+   
 
             if(i.innerHTML == "bat"){
-           
-              notify.innerHTML = "youre batting"
-              let batting = document.createElement("button")
-              batting.className = "optionsss"
-              wrapBatOrBowlBtn.appendChild(batting)
-              batting.innerHTML = "bat"
+              battingfn()
             }
             else if(i.innerHTML == "bowl"){
-              
-              notify.innerHTML = "youre bowling"
-              let bowling = document.createElement("button")
-              bowling.className = "optionsss"
-              wrapBatOrBowlBtn.appendChild(bowling)
-              bowling.innerHTML = "bowl"
+              bowlingfn()
             }
+          
+          
+           
 
-
-            let battingOrBowling = document.querySelectorAll(".optionsss")
-            battingOrBowling.forEach((i)=>{
-              i.addEventListener("click",()=>{
-                let random = Math.floor(Math.random()*4)
-                left.innerHTML = random
-              })
-            })
+           
           })
         })
-
+       
      
        
       });
