@@ -107,8 +107,12 @@ function middlescore() {
   });
 }
 function toss(flag) {
+  let firstBatting;
+  let firstBowling;
   let newScore  = 0
  let score = 0
+ let hisScore = 0
+ let newHisScore = 0
  
  let oddOrEven = Math.floor(Math.random() * 4) 
   let tossBtn = document.getElementById("toss-btn");
@@ -169,10 +173,7 @@ function toss(flag) {
           if(displayBox.innerText == random){
             displayBoxo.innerHTML = "out"
             i.style.display = "none"
-            let bowling = document.createElement("button")
-        bowling.className = "optionsss"
-        wrapBatOrBowlBtn.appendChild(bowling)
-        bowling.innerHTML = "bowl"
+          
             if(newScore === 0){
               BottomDisplayBox.innerHTML = `score:0`
               notify.innerHTML = "out"
@@ -203,7 +204,7 @@ function toss(flag) {
     
 
     function bowlingfn(){
-
+  
       let notify = document.createElement("h3")
       notify.id = "notify"
     left.innerHTML = ""
@@ -220,11 +221,37 @@ function toss(flag) {
     let battingOrBowling = document.querySelectorAll(".optionsss")
     battingOrBowling.forEach((i)=>{
       i.addEventListener("click",()=>{
+
         var random = Math.floor(Math.random()*4)
         left.innerHTML = random
-        let numRight = parseInt(displayBox.innerHTML)
+        let totalHisScore =random+newHisScore
+        let numRight = parseInt(displayBox.innerText)
         if(random == numRight){
-          console.log("out");
+          bowling.style.display = "none"
+          displayBoxo.innerHTML = "out"
+          if(hisScore === 0){
+            BottomDisplayBox.innerHTML = `score:0`
+            notify.innerHTML = "out"
+          }
+          else{
+            BottomDisplayBox.innerHTML = `his score:${hisScore}`
+            notify.innerHTML = "out"
+          }
+        }
+        else{
+          if(numRight == random){
+            hisScore = newHisScore
+            BottomDisplayBox.innerHTML = `his score:${hisScore}`
+            notify.innerHTML = "out"
+
+          }
+          else{
+            hisScore = totalHisScore
+            displayBoxo.innerHTML = `score:${totalHisScore}`
+            newHisScore = totalHisScore 
+                              
+           }
+          
         }
       })})
 
@@ -262,9 +289,11 @@ function toss(flag) {
               displayBoxo.innerHTML = batOrBowl[numBatOrBowl]
         
               if(numBatOrBowl === 0){
+                firstBatting = true
              battingfn()
               }
               else{
+                firstBatting = false
                 bowlingfn()
               }
             
@@ -295,10 +324,11 @@ function toss(flag) {
               displayBoxo.innerHTML = batOrBowl[numBatOrBowl]
               wrap.style.display = "none"
               if(numBatOrBowl === 0){
-               
+               firstBatting = true
               battingfn()
               }
               else{
+                firstBatting = false
                 bowlingfn()
               }
               
@@ -320,16 +350,13 @@ function toss(flag) {
    
 
             if(i.innerHTML == "bat"){
+              firstBatting = true
               battingfn()
             }
             else if(i.innerHTML == "bowl"){
+              firstBatting = false
               bowlingfn()
-            }
-          
-          
-           
-
-           
+            }      
           })
         })
        
