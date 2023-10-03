@@ -2,7 +2,7 @@ body{
     margin: 0;
 }
 .body{
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     width: 100%;
     color: white;
     min-height: 100vh;
@@ -48,6 +48,10 @@ align-items: center;
 #center{
     flex: 0.5;
     height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .base{
   
@@ -70,6 +74,30 @@ align-items: center;
     align-items: center;
     cursor: pointer;
 
+}
+#score-box{
+    width: 90%;
+    outline: 1px solid;
+    height: 100px;
+}
+#popup{
+   
+    position: absolute;
+   width: 100%;
+   min-height: 100vh;
+   background-color: rgba(0, 0, 0, 0.526)
+}
+.popclass{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+#pop-toss{
+    background-color: gray;
+    width: 350px;
+    height: 300px;
+    margin: auto;
 }
 @media (max-width:700px){
     #left,#right,#center{
