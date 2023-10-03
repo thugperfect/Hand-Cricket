@@ -1,7 +1,10 @@
 const start_btn = document.getElementById('start')
 const game_page = document.getElementById('game')
 const right = document.getElementById('right')
-let score = 0
+const left =  document.getElementById('left')
+const arr =[]
+let scoreRight = 0
+let scoreLeft = 0
 function start(){
   start_btn.style.display = 'none'
   game_page.style.display = 'block'
@@ -22,8 +25,10 @@ const all_btns = document.querySelectorAll('.click-btn')
 const clickFn =(e)=>{
   const click = Number(e.target.id)
   right.innerText = click
-  score+=click
-  console.log(score)
+  scoreRight+=click
+ 
+  const random = Math.floor(1+Math.random()*6)
+  left.innerText = random
   
 }
 for(i = 0;i<all_btns.length;i++){
