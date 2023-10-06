@@ -13,11 +13,15 @@ function start(){
 }
 
 if(!toss){
+  const showDiv = document.createElement('div')
+  showDiv.id = 'show-div'
+  showDiv.classList.add('center')
   const tossDiv = document.createElement('div')
   tossDiv.className = 'center'
   const tossBtn = document.createElement('button')
   tossBtn.innerText = 'TOSS'
   tossDiv.appendChild(tossBtn)
+  center.appendChild(showDiv)
   center.appendChild(tossDiv)
   tossBtn.onclick = function fun(){
     tossBtn.style.display = 'none'
@@ -29,18 +33,29 @@ if(!toss){
     odd.className = 'oddeven'
     even.className = 'oddeven'
 
-    const oddeven = document.getElementsByClassName('oddeven')
-    for(i = 0;i<oddeven.length;i++){
-      oddeven[i].addEventListener('click',()=>{
-        tossVal = oddeven[i].innerText
-        tossDiv.style.display = 'none'
-        console.log(tossVal)
-      })
-    }
+   
     tossDiv.appendChild(odd)
     tossDiv.appendChild(even)
+
+    const oddeven = document.getElementsByClassName('oddeven')
+    
+    for(i = 0;i<oddeven.length;i++){
+      oddeven[i].addEventListener('click',clickfn)
+    }
   }
   
+}
+
+const clickfn = function (e) {
+  
+  tossVal = e.target.innerText
+  const oddeven = document.getElementsByClassName('oddeven')
+  for(i = 0;i<oddeven.length;i++){
+    oddeven[i].style.display = 'none'
+  }
+  const showDiv = document.getElementById('show-div')
+  showDiv.innerText = tossVal
+
 }
 
 const base_panel = document.getElementById('base')
