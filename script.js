@@ -4,7 +4,10 @@ const right = document.getElementById('right')
 const left =  document.getElementById('left')
 const center = document.getElementById('center')
 let toss = false
+let tossWon = '';
 let tossVal = ''
+let total = 0;
+let totalNa = 0
 let scoreRight = 0
 let scoreLeft = 0
 function start(){
@@ -18,6 +21,7 @@ if(!toss){
   showDiv.classList.add('center')
   const tossDiv = document.createElement('div')
   tossDiv.className = 'center'
+  tossDiv.id = 'toss-div'
   const tossBtn = document.createElement('button')
   tossBtn.innerText = 'TOSS'
   tossDiv.appendChild(tossBtn)
@@ -66,22 +70,42 @@ const clickfn = function (e) {
     }
     
     const all_btns = document.querySelectorAll('.click-btn')
-    
+
     const clickFn =(e)=>{
       const random = Math.floor(1+Math.random()*6)
       const click = Number(e.target.id)
       right.innerText = click
-      scoreRight+=click
+      scoreRight += click
      
-     
-      left.innerText = random
+      left.innerText = random 
       
+      total = random+click
+      if(total%2 === 0){
+        totalNa = 'even'
+      }else{
+        totalNa = 'odd'
+      }
+      if(tossVal === totalNa){
+        tossWon ='won'
+      }else{
+        tossWon = 'loose'
+      }
+      for(i = 0;i<all_btns.length;i++){
+    
+        all_btns[i].removeEventListener('click',clickFn)
+      
+      }
+      const showDiv = document.getElementById('show-div')
+      showDiv.innerText = `Toss ${tossWon}`
+
+     
     }
+   
     for(i = 0;i<all_btns.length;i++){
     
       all_btns[i].addEventListener('click',clickFn)
     
     }
+    
   }
-  
 }
