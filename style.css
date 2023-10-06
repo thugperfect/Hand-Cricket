@@ -50,7 +50,7 @@ align-items: center;
     height: 500px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+   
     align-items: center;
 }
 .base{
@@ -74,6 +74,9 @@ align-items: center;
     align-items: center;
     cursor: pointer;
 
+}
+#show-div{
+    height: 100px;
 }
 #score-box{
     width: 90%;

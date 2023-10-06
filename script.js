@@ -42,8 +42,7 @@ if(!toss){
     for(i = 0;i<oddeven.length;i++){
       oddeven[i].addEventListener('click',clickfn)
     }
-  }
-  
+  } 
 }
 
 const clickfn = function (e) {
@@ -56,31 +55,33 @@ const clickfn = function (e) {
   const showDiv = document.getElementById('show-div')
   showDiv.innerText = tossVal
 
-}
-
-const base_panel = document.getElementById('base')
-for(i = 1;i<7;i++){
-  const click_btn = document.createElement('div')
-  click_btn.className = 'click-btn'
-  click_btn.id = i
-  click_btn.innerText = i
-  base_panel.appendChild(click_btn)
-}
-
-const all_btns = document.querySelectorAll('.click-btn')
-
-const clickFn =(e)=>{
-  const random = Math.floor(1+Math.random()*6)
-  const click = Number(e.target.id)
-  right.innerText = click
-  scoreRight+=click
- 
- 
-  left.innerText = random
+  if(tossVal){
+    const base_panel = document.getElementById('base')
+    for(i = 1;i<7;i++){
+      const click_btn = document.createElement('div')
+      click_btn.className = 'click-btn'
+      click_btn.id = i
+      click_btn.innerText = i
+      base_panel.appendChild(click_btn)
+    }
+    
+    const all_btns = document.querySelectorAll('.click-btn')
+    
+    const clickFn =(e)=>{
+      const random = Math.floor(1+Math.random()*6)
+      const click = Number(e.target.id)
+      right.innerText = click
+      scoreRight+=click
+     
+     
+      left.innerText = random
+      
+    }
+    for(i = 0;i<all_btns.length;i++){
+    
+      all_btns[i].addEventListener('click',clickFn)
+    
+    }
+  }
   
-}
-for(i = 0;i<all_btns.length;i++){
-
-  all_btns[i].addEventListener('click',clickFn)
-
 }
